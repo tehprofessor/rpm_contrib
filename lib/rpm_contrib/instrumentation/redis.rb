@@ -23,8 +23,8 @@ DependencyDetection.defer do
 
       def raw_call_command_with_newrelic_trace *args
         method_name = args[0].is_a?(Array) ? args[0][0] : args[0]
-        metrics = ["Database/Redis/#{method_name}",
-                   (NewRelic::Agent::Instrumentation::MetricFrame.recording_web_transaction? ? 'Database/Redis/allWeb' : 'Database/Redis/allOther')]
+        metrics = ["Memcache/Redis/#{method_name}",
+                   (NewRelic::Agent::Instrumentation::MetricFrame.recording_web_transaction? ? 'Memcache/Redis/allWeb' : 'Memcache/Redis/allOther')]
         self.class.trace_execution_scoped(metrics) do
           # NewRelic::Control.instance.log.debug("Instrumenting Redis Call[#{method_name}]: #{args[0].inspect}")
           raw_call_command_without_newrelic_trace(*args)
